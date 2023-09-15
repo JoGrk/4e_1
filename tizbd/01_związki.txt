@@ -1,0 +1,37 @@
+1. Księżyc - planeta (księżyc krąży wokół planety)
+jeden księżyc krąży wokół jednej planety
+jedna planeta może mieć wiele księżyców
+jeden do wielu
+idplanety wstawiony do tabeli księżyc
+
+2. planeta - gwiazda (planeta okrąża słońce)
+jedna planeta krąży wokół jednej gwiazdy 
+wokół jednej gwiazdy może krążyć wiele planet
+jeden do wielu
+idgwiazdy wstawiony do tabeli planety 
+
+3. państwo - kontynent 
+jedno panstwo moze nalezec do wielu kontynentow
+na jednym kontynencie moze lezec wiele panstwo
+wiele do wielu
+pojawia się tabela z idpaństwa i idkontynentu
+
+4. państwo - stolica
+jedno państwo ma jedną stolicę
+jedna stolica należy do jednego państwa
+jeden do jeden
+
+5. państwo - morze (państwo ma dostęp do morza)
+jedno państwo może mieć dostęp do wielu mórz
+do jednego morza może miec dostep wiele państw
+wiele do wielu
+
+6. czekoladka - bombonierka (czekoladka jest składnikiem bombonierki)
+W jednej bombonierce może być wiele czekoladek
+jedna czekoladka może być w wielu bombonierkach
+
+7. Autor - książka (książka została napisana przez ... )
+
+8. Sprzedawca- aukcja (internetowa, np. na allegro.pl)
+
+9. Licytujący - aukcja (internetowa, np. na allegro.pl)
