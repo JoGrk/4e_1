@@ -36,23 +36,39 @@ MODIFY Projekt char(4);
 ALTER TABLE Przypisanie
 ADD PRIMARY KEY (Projekt, SSN);
 -- 6. W tabeli Projekty ustaw wartość domyślną dla pola Miejsce na 'Bydgoszcz'. (sprawdź składnię np. na w3schools
-
+ALTER TABLE Projekty
+ALTER Miejsce SET DEFAULT 'Bydgoszcz'; 
 -- 7. Do tabeli Projekty za polem Nazwa dodaj pole czas typu całkowitego.
+ALTER TABLE Projekty
+add czas int  after Nazwa; 
 
 
 -- 8. W tabeli Projekty usuń pole Miejsce
+ALTER TABLE Projekty
+DROP miejsce;
 
 -- 9. W tabeli Pracownicy zmień pole Nazwisko - powinno być tekstem o zmiennej długości do 50 znaków
+ALTER TABLE Pracownicy
+MODIFY Nazwisko varchar(50);
 
 -- 10. W tabeli Projekty ustaw wartość domyślną na polu Czas na 100.
+ALTER TABLE Projekty
+ALTER Czas SET DEFAULT 100;
 
 -- 11. Zmień nazwę tabeli Pracownicy na Naukowcy.
-
+ALTER TABLE Pracownicy 
+RENAME TO Naukowcy
 -- 12. W tabeli Przypisanie przesuń pole Projekt za pole SSN.
+ALTER TABLE Przypisanie
+MODIFY Projekt char(4) AFTER SSN;
 
 -- 14. W tabeli Przypisanie zmień nazwę pola SSN na Naukowiec
+ALTER TABLE Przypisanie
+CHANGE SSN Naukowiec int;
 
 -- 15. Z tabeli Naukowcy usuń pole Data_urodzenia
+ALTER TABLE Naukowcy
+DROP data_urodzenia;
 
 -- 16. Zaimportuj dane
 
