@@ -15,9 +15,16 @@ from produkty
 WHERE cena <5
 order by cena desc;
 -- 4. dodatkowo interesują nas tylko produkty na literę B
+SELECT * FROM produkty
+WHERE nazwa like 'B%'
  
 -- 5.jak wyżej, ale oprócz produktów na B zainteresowani jesteśmy produktami na literę S
- 
+ SELECT * FROM produkty
+ WHERE nazwa like 'B%' OR nazwa like 'S%';
 -- 6. interesują nas produkty o cenie pomiędzy 5 a 10 złotych
+select * from produkty
+where cena between 5 and 10 ;
  
 -- 7. chcemy wypisać nazwy i ceny produktów, które są bułeczkami, sokami, chipsy (nazwa:  chleb, sok, chipsy)
+SELECT nazwa, cena FROM produkty
+WHERE nazwa IN('chleb', 'sok', 'chipsy');
