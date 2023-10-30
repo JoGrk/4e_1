@@ -37,17 +37,48 @@ WHERE RODZAJ = "NA"
 OR
 RODZAJ = "GD";
 -- 9. wyświetl nazwy towarów, które nie zawierają litery a w NAZWIE;
+SELECT NAZWA
+FROM towar
+WHERE NOT NAZWA LIKE "%a%";
 
 -- 10. Wyprodukowane w 1997 roku;
+SELECT NAZWA, DATA_PROD 
+FROM Towar
+WHERE DATA_PROD like "1997%";
 
 -- 11. (DATA_PROD - od początku 1995 roku do końca 1998,) CENA jest dwucyfrowa, WAGA < 0.5;
+SELECT *
+FROM Towar
+WHERE YEAR(DATA_PROD)BETWEEN 1995 AND 1998
+    AND CENA BETWEEN 10 AND 99.99
+    AND WAGA < 0.5;
 
 -- 12. jw. wyświetl tylko NAZWĘ, RODZAJ I CENĘ;
+SELECT NAZWA, RODZAJ, CENA
+FROM Towar
+WHERE YEAR(DATA_PROD)BETWEEN 1995 AND 1998
+    AND CENA BETWEEN 10 AND 99.99
+    AND WAGA < 0.5;
 
 -- 13. rekordy w których CENA jest pomiędzy 12,50 a 35 i WAGA jest pomiędzy 0,5 a 2,5;
+SELECT * 
+FROM Towar
+WHERE CENA BETWEEN 12.50 AND 35
+AND WAGA BETWEEN 0.5 AND 2.5;
 
 -- 14. jw. - wyświetl tylko NAZWĘ, RODZAJ i wartość (ILOSC * CENA) ;
-
+SELECT NAZWA, RODZAJ, ILOSC*CENA AS WARTOSC
+FROM Towar
+WHERE CENA BETWEEN 12.50 AND 35
+AND WAGA BETWEEN 0.5 AND 2.5;
 -- 15. jw. posortowane malejąco wg NAZWY ; 
-
+SELECT NAZWA, RODZAJ, ILOSC*CENA AS WARTOSC
+FROM Towar
+WHERE CENA BETWEEN 12.50 AND 35
+AND WAGA BETWEEN 0.5 AND 2.5
+ORDER BY NAZWA DESC;
 -- 16. różne RODZAJE towarów (bez powtórek) ; (wskazówka: SELECT DISTINCT...)
+SELECT DISTINCT rodzaj 
+FROM towar;
+
+
