@@ -30,10 +30,43 @@
         $nazwisko=$row['nazwisko'];
         echo "<li><b>$tytul</b> $nazwisko</li>";
     }
-
-
-
     echo "</ul>";
+
+    $sql="SELECT filmy.*
+    from filmy
+        INNER JOIN recenzje ON filmy.recenzjaID = recenzje.IDRecenzja
+    WHERE ocena = 4;";
+    $result=$conn->query($sql);
+    echo "<table>";
+    while ($row=$result-> fetch_assoc()){
+        echo "<tr>";
+        foreach ($row as $el) {
+            echo "<td>$el</td>";
+        }
+        echo "</tr>";
+    }
+    echo "</table>";
+
+
+    /// wypisz tytuł, gatunek filmu, nazwisko reżysera, treść recenzji w postaci tabeli 
+    // dodatkowo nazwy pól w wierszu nagłówkowym
+    $sql="SELECT tytul, gatunek, nazwisko, tresc
+    FROM filmy
+        INNER JOIN recenzje ON filmy.recenzjaID= recenzje.IDRecenzja
+        INNER JOIN rezyserzy ON filmy.rezyserID = rezyserzy.IDrezyser;";
+    $result=$conn->query($sql);
+    echo "<table>";
+    while($row=$conn->fetch_assoc()){
+        echo "<tr>";
+        foreach($row as $ele){
+            echo "<td>$ele</td>";
+        }
+        
+        echo"</tr>";
+    }
+
+    echo "</table>";
+
     $conn->close();
     ?>
 </body>

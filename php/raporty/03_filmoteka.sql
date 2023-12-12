@@ -16,3 +16,10 @@ WHERE ocena = 4;
 -- d) Dodanie rekordu do tabeli rezyserzy z danymi: ID – 4, Andrzej Wajda
 INSERT INTO Rezyserzy
 values (4,"Andrzej","Wajda");
+
+/// wypisz tytuł, gatunek filmu, nazwisko reżysera, treść recenzji w postaci tabeli 
+    // dodatkowo nazwy pól w wierszu nagłówkowym
+SELECT tytul, gatunek, nazwisko, tresc
+FROM filmy
+    INNER JOIN recenzje ON filmy.recenzjaID= recenzje.IDRecenzja
+    INNER JOIN rezyserzy ON filmy.rezyserID = rezyserzy.IDrezyser;
