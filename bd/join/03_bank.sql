@@ -72,8 +72,9 @@ SELECT Imie,Nazwisko,NazwaProduktu,Punktacja*Ilosc as suma_punktow
 -- do tego dodaj tabelę Produkty (pole łączące to NazwaProduktu i Nazwa)
 -- do tego dodaj tabelę Odziały, pola łączące to NrRozliczOddz z tabeli Pracownicy oraz NrRozlicz z tabeli Oddziały
 -- w warunku wybierz tylko Miejscowsc 'Warszawa'
+
 -- 6.Imiona, nazwiska i numery pracowników wyróżnionych w zeszłym okresie.
-
- 
-
 -- połącz tabelę Pracownicy i Wyroznieni (pole łączące to NrPracownika i Nr), w zestawieniu pojawią się tylko Ci pracownicy, których numery są w tabeli Wyróżnieni - sprawdź
+SELECT imie, nazwisko, Nr 
+FROM pracownicy 
+    INNER JOIN wyroznieni ON pracownicy.Nr = wyroznieni.Nrpracownika;
