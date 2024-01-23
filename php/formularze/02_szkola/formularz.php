@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Uczniowie</h1>
-<section>
+<section id="list">
     <h2>Lista uczniów</h2>
 
 
@@ -28,10 +28,24 @@
         echo "</tr>";
         }
     ?>
-    </table>
-    
-
+    </table>   
 </section>
 
+<section id="update">
+    <h2>Aktualizacja</h2>
+    <form action="aktualizacja.php" method="POST">
+        <label for="id-ucznia">id ucznia</label>
+        <input type="number" name="id-ucznia" id="id ucznia">
+        <button>Wyślij</button>
+    </form>
+</section>
+<section id="delete">
+    <h2>Usuwanie</h2>
+    <form action="usuwanie.php" method="POST">
+        <label for="id-ucznia">id ucznia</label>
+        <input type="number" name="id-ucznia" id="id-ucznia">
+        <button>Wyślij</button>
+    </form>
+</section>
 </body>
 </html>
