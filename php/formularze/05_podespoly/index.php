@@ -40,9 +40,9 @@
             <?php
                 foreach($kategorie as $kategoria){
                     echo 
-                    "<option value={$kategoria['id'}>
+                    "<option value={$kategoria['id']}>
                        {$kategoria['kategoria']}
-                    </option>"
+                    </option>";
                 }
             ?>
         </select>
