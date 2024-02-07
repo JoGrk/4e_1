@@ -1,10 +1,12 @@
 <?php
         $conn = new mysqli('localhost', 'root', '', '4e_1_baza');
+
         $sql = "SELECT kategoria,nazwa,cena 
         FROM podzespoly
             INNER JOIN typy ON podzespoly.typy_id = typy.id";
         $result = $conn -> query($sql);
         $podzespoly = $result -> fetch_all(1);
+
         $sql = "SELECT id,kategoria FROM typy";
         $result = $conn -> query($sql);
         $kategorie = $result -> fetch_all(1);
@@ -46,6 +48,7 @@
                 }
             ?>
         </select>
+        <button>Dodaj </button>
     </form>
 </body>
 </html>

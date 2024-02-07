@@ -32,10 +32,23 @@ WHERE OrderID in (SELECT OrderID from Orders WHERE OrderDate like '1996%');
 DELETE FROM orders where OrderDate like '1996%';
 
 -- 6. Utwórz tabelę  Archiwum_Kontrahentów z danymi: nazwa dostawcy lub nazwa klienta, osoba do kontaktu, miasto, kraj z Włoch
+CREATE TABLE Archiwum_Kontrahentow AS 
+SELECT SupplierName, ContactName, City, Country
+FROM Suppliers 
+WHERE Country = 'Italy'
+UNION
+SELECT CustomerName, ContactName, City, Country
+FROM Customers 
+WHERE Country = 'Italy';
 
 -- 7. Usuń klientów i dostawców z Włoch z tabel Customers i Suppliers (dwoma zapytaniami)
 
+
 -- 8. Do tabeli Archiwum_Kontrahentów dodaj kontrahentów z Niemiec i Francji
+INSERT INTO Archiwum_Kontrahentow (SupplierName, ContactName, City, Country)
+SELECT CustomerName, ContactName, City, Country
+FROM Customers
+WHERE Country IN ('Germany','France'); 
 
  
 
