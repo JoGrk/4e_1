@@ -28,17 +28,40 @@ CREATE TABLE Uslugi(
 
 -- A. do pola nazwa: wartości w polu nie mogą się powtarzać, pole nie może być puste
 -- B. do pola cena: wpisywane wartości muszą być większe od 10
-
+-- A
 ALTER TABLE Uslugi
 MODIFY nazwa varchar(50) unique NOT NULL; 
+-- B
+ALTER TABLE Uslugi
+ADD CONSTRAINT ch_cena check (cena > 10)  
+
 
 -- 4. Połącz obie tabele:
 
 -- A. określ typ związku i sposób przejścia do postaci relacyjnej
 -- B. dodaj potrzebne pole i/lub tabele, pokaż projekt na zrzucie
 -- C. dodaj więzy integralności referencyjnej
--- 5. Wprowadź dane dwóch klientów i dwie usługi
 
+CREATE TABLE lol(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_klienta int,
+    id_uslugi int
+);
+ALTER TABLE lol
+ADD constraint fk_klient FOREIGN KEY(id_klienta) references Klienci (id),
+ADD CONSTRAINT fk_uslugi FOREIGN KEY(id_uslugi) references
+Uslugi (id)
+
+-- 5. Wprowadź dane dwóch klientów i dwie usługi
+INSERT INTO Klienci(imie,nazwisko,email)
+VALUES
+    ("Ktos","Jakis","mail@mail.com"),
+    ("Andrzej","Nowak","nowy@mail.com");
+
+INSERT INTO Uslugi (nazwa,opis,cena)
+VALUES 
+    ("Praca","Droga",20.5),
+    ("Kolejna","Jakas",41.4);
 
 -- 6. Upewnij się, że działają więzy integralności (nie puste, wartości się nie powtarzają, check)
 
@@ -49,6 +72,11 @@ MODIFY nazwa varchar(50) unique NOT NULL;
 -- 7. Zamów i wyprowadź do bazy danych wykonanie usług: 
 
 -- A. pierwszy klient zamawia pierwszą usługę, przy wprowadzaniu danych posługuj się nazwami usług
+INSERT INTO lol (id_klienta, id_uslugi)
+VALUES 
+    ((SELECT id FROM klienci WHERE nazwisko='Jakis'),
+    (SELECT id FROM uslugi WHERE nazwa='Praca')
+    );
 
 -- B. Drugi klient zamawia obie usługi, przy wprowadzaniu danych posługuj się nazwami usług
 
