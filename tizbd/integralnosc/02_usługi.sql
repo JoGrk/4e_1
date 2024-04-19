@@ -53,7 +53,7 @@ ADD CONSTRAINT fk_uslugi FOREIGN KEY(id_uslugi) references
 Uslugi (id)
 
 -- 5. Wprowadź dane dwóch klientów i dwie usługi
-INSERT INTO Klienci(imie,nazwisko,email)
+INSERT INTO Klienci(imie,nazwisko,e_mail)
 VALUES
     ("Ktos","Jakis","mail@mail.com"),
     ("Andrzej","Nowak","nowy@mail.com");
@@ -80,8 +80,28 @@ VALUES
 
 -- B. Drugi klient zamawia obie usługi, przy wprowadzaniu danych posługuj się nazwami usług
 
+INSERT INTO lol (id_klienta, id_uslugi)
+VALUES
+    (2,(SELECT id from uslugi WHERE nazwa='praca')),
+    (2,(SELECT id from uslugi WHERE nazwa='kolejna'));
+
+
+UPDATE lol 
+SET id_klienta=1
+WHERE id=1;
 -- 8. Upewnij się, że działają więzy integralności referencyjnej
 
 -- A. usuń dane pierwszego klienta z tabeli klienci,
+DELETE FROM klienci 
+WHERE id = 1
 --  B. z tabeli klienci usuń dane pierwszego klienta stosując podejście wyważone
+update lol
+set id_klienta = NULL
+where id_klienta=1;
+
 -- C. z tabeli klienci usuń dane drugiego klienta stosując podejście kaskadowe usuwanie powiązanych pól
+DELETE FROM lol 
+WHERE id_klienta = 2;
+
+DELETE FROM klienci
+WHERE id = 2;
