@@ -1,38 +1,59 @@
 -- 1. Przygotuj widok Wspolpracownicy zawierający imiona i nazwiska osób z tabeli Pracownicy i z tabeli Handlowcy.
-CREATE VIEW Wspolpracownicy AS
+CREATE VIEW Wspolpracownicy AS 
 SELECT imie,nazwisko 
 FROM Pracownicy 
-UNION 
-SELECT imie,nazwisko 
+Union 
+SELECT imie,nazwisko
 FROM Handlowcy;
- 
+
+DROP VIEW Wspolpracownicy;
+
 -- 2. Korzystając z perspektywy Wspolpracownicy wyszukaj osoby o imieniu Ilona.
-SELECT * FROM Wspolpracownicy 
-WHERE imie = 'Ilona';
+
+SELECT * FROM Wspolpracownicy WHERE imie = 'Ilona';
 
 -- 3. Przygotuj widok SredniPrzebiegAut wyświetlający rocznik i średni przebieg aut z danego rocznika.
+
+DROP VIEW SredniPrzebiegAut;
+
 CREATE VIEW SredniPrzebiegAut AS
-SELECT rocznik, AVG(przebieg) AS SredniPrzebieg FROM Auta
-Group BY rocznik;
+SELECT rocznik, AVG(przebieg) AS Sredni_Przebieg
+FROM Auta
+GROUP BY rocznik;
+
 
 -- 4. Zgłoś zapytanie do perspektywy SredniPrzebiegAut: wyszukaj informacje o rocznikach, z których średni przebieg aut jest mniejszy od 100000.
- SELECT * FROM SredniPrzebiegAut
- WHERE SredniPrzebieg <100000;
+
+SELECT *
+FROM SredniPrzebiegAut
+WHERE Sredni_Przebieg<100000;
+
 -- 5.Utwórz widok ModeleNazwy, w którym wyświetlisz dla każdego modelu jego nazwę (w kolumnie o nazwie model) i nazwę producenta pobraną z tabeli Producenci (w kolumnie o nazwie producent) oraz rocznik początkowy i rocznik końcowy danego modelu.
- SELECT Producenci.Nazwa AS Producent_nazwa,
-    Modele.nazwa AS Model_nazwa,
-    rocznik_pocz,rocznik_konc 
-FROM Producenci
-    INNER JOIN Modele ON Producenci.ID =Modele.producent;
-
-
+CREATE VIEW ModeleNazwy AS 
+SELECT 
+    Modele.nazwa AS model,
+    Producenci.nazwa AS producent, 
+    Modele.rocznik_pocz,
+    modele.rocznik_konc
+FROM 
+    Modele
+    INNER JOIN Producenci ON Modele.producent = Producenci.ID;
+ 
 -- 6. Za pomocą widoku ModeleNazwy policz, ile jest modeli Fiata i wyniki wyświetl w kolumnie o nazwie Fiat
+SELECT COUNT(*) AS FIAT
+FROM ModeleNazwy
+WHERE producent = 'Fiat';
  
 -- 7. Przy użyciu perspektywy ModeleNazwy wyświetl nazwy wszystkich modeli produkowanych przez Fiata
+SELECT model, producent
+FROM ModeleNazwy
+where producent="Fiat";
  
 -- 8. Usuń widok wirtualny ModeleNazwy.
  
 -- 9. przygotuj widok ModeleAuta zawierający wszystkie pola z tabeli Auta oraz wszystkie niemal pola z tabeli Modele (oprócz identyfikatora) (użyj INNER JOIN)
+
+SELECT Auta.*
  
 -- 10. Korzystając z perspektywy ModeleAuta wyświetl nazwę, rocznik, wartość samochodów Megane (nazwa)
  
