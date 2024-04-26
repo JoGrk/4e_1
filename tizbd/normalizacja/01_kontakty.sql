@@ -47,3 +47,54 @@ ALTER TABLE my_contacts
 
 SELECT i1, i2, i3
 FROM my_contacts;
+
+CREATE TABLE interests as
+select i1 as name from my_contacts WHERE i1 != ''AND i1 is NOT NULL
+UNION
+select i2 from my_contacts WHERE i2 != '' AND i2 is NOT NULL
+UNION
+select i3 from my_contacts WHERE i3 != '' AND i3 is NOT NULL;
+
+ALTER TABLE interests
+    ADD id int primary key auto_increment first;
+
+ALTER TABLE my_contacts 
+    ADD id int primary key auto_increment first;
+
+CREATE TABLE interests_contacts as
+SELECT 
+    my_contacts.id as id_contacts,
+    interests.id as id_interests
+from my_contacts, interests
+WHERE i1=name
+UNION
+SELECT
+    my_contacts.id as id_contacts,
+    interests.id as id_interests
+from my_contacts, interests
+WHERE i2=name
+UNION
+SELECT
+    my_contacts.id as id_contacts,
+    interests.id as id_interests
+from my_contacts, interests
+WHERE i3=name;
+
+ALTER TABLE interests_contacts
+ADD primary key (id_contacts, id_interests); 
+
+SELECT last_name, name
+from my
+
+ 
+CREATE VIEW contactsinterests as
+SELECT my_contacts.*, name, id_contacts, id_interests
+FROM my_contacts
+INNER JOIN interests_contacts ON my_contacts.id = interests_contacts.id_contacts
+INNER JOIN interests ON interests_contacts.id_interests = interests.id; 
+
+
+
+
+
+

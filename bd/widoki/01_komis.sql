@@ -52,13 +52,32 @@ where producent="Fiat";
 -- 8. Usuń widok wirtualny ModeleNazwy.
  
 -- 9. przygotuj widok ModeleAuta zawierający wszystkie pola z tabeli Auta oraz wszystkie niemal pola z tabeli Modele (oprócz identyfikatora) (użyj INNER JOIN)
+CREATE VIEW ModeleAuta AS
+SELECT Auta.*,producent,nazwa 
+FROM Auta
+INNER JOIN  Modele ON modele.id = auta.model;
 
-SELECT Auta.*
- 
 -- 10. Korzystając z perspektywy ModeleAuta wyświetl nazwę, rocznik, wartość samochodów Megane (nazwa)
  
+SELECT nazwa,rocznik,wartosc
+FROM ModeleAuta
+WHERE nazwa='Megane';
+
+
 -- 11. usuń widok ModeleAuta
+
+DROP VIEW ModeleAuta;
  
 -- 12. Przygotuj widok ProducenciModeleAuta zbierający dane z tych trzech tabel (z wyjątkiem zdublowanych) (uzyj INNER JOIN)
+CREATE VIEW ProducenciModeleAuta
+AS
+SELECT Auta.*, Modele.nazwa AS Modele_nazwa, Producenci.nazwa AS Producenci_nazwa
+FROM Auta
+INNER JOIN Modele ON modele.ID = auta.model
+INNER JOIN Producenci ON Producenci.ID = modele.producent;
  
 -- 13. Korzystając z widoku ProducenciModeleAuta wyświetl auta o przebiegu mniejszym niż 150 000
+
+SELECT *
+FROM ProducenciModeleAuta
+WHERE przebieg < 150000; 
