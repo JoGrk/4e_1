@@ -44,3 +44,6 @@ UPDATE my_contacts
 
 ALTER TABLE my_contacts
     DROP COLUMN interests;
+
+SELECT i1, i2, i3
+FROM my_contacts;
