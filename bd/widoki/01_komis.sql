@@ -73,7 +73,7 @@ CREATE VIEW ProducenciModeleAuta
 AS
 SELECT Auta.*, Modele.nazwa AS Modele_nazwa, Producenci.nazwa AS Producenci_nazwa
 FROM Auta
-INNER JOIN Modele ON modele.ID = auta.model
+INNER JOIN Modele ON modele.ID = auta.modelż
 INNER JOIN Producenci ON Producenci.ID = modele.producent;
  
 -- 13. Korzystając z widoku ProducenciModeleAuta wyświetl auta o przebiegu mniejszym niż 150 000
