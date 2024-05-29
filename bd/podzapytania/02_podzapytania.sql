@@ -1,33 +1,83 @@
--- 3. Wybierz nazwy i numery telefonów klientów, którzy nie kupili żadnego produktu z kategorii Confections
+
  
 
 SELECT CustomerName 
 FROM Customers
-WHERE CustomerID NOT IN (SELECT CustomerID
+
+
+-- Podzapytanie wybierające wiele wartości
+-- 1. Wybierz dane klientów klientów, którzy nie kupili żadnego produktu z kategorii Confections
+ 
+ WHERE CustomerID NOT IN (SELECT CustomerID
  FROM Orders
     INNER JOIN order_details ON order_details.orderID = Orders.orderID
     INNER JOIN products ON order_details.productID = Products.productID
     INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID
-    WHERE CategoryName = 'Produce');
+    WHERE CategoryName = 'Confections');
 
--- 4. Wybierz nazwy i numery telefonów klientów, którzy kupili więcej niż 3 różne produkty z kategorii .Confections.
+-- 2. Czy są jacyś klienci którzy nie złożyli żadnego zamówienia w 1997 roku, jeśli tak to pokaż ich dane adresowe.
  
---  5. Dla każdego produktu podaj maksymalną liczbę zamówionych jednostek
+SELECT CustomerID
+FROM orders
+WHERE YEAR(OrderDate)=1997 AND CustomerID IS NOT NULL;
+
+SELECT CustomerName,Country
+FROM Customers
+WHERE CustomerID NOT IN (SELECT CustomerID
+FROM orders
+WHERE YEAR(OrderDate)=1997 AND CustomerID IS NOT NULL);
+
+-- 3. Wyświetl nazwiska i imiona pracowników, którzy nie sprzedali niczego do Argentyny.
+
+SELECT EmployeeID 
+FROM orders
+INNER JOIN Customers 
+ON orders.CustomerID = Customers.CustomerID
+Where Country = "Argentina";
+
+SELECT FirstName, LastName
+FROM Employees
+WHERE EmployeeID NOT IN (SELECT EmployeeID 
+FROM orders
+INNER JOIN Customers 
+ON orders.CustomerID = Customers.CustomerID
+Where Country = "Argentina");
+
+
+-- 4. Wypisz nazwy i kraje klientów, którzy zawsze zamawiali tylko jeden produkt.
+
+SELECT CustomerID, orders.orderID, COUNT(*)
+FROM orders
+INNER JOIN order_details
+ON order_details.orderID = orders.orderID
+GROUP BY orderID
+HAVING COUNT(*)>1;
+
  
---  6. Podaj wszystkie produkty których cena jest mniejsza niż średnia cena produktu danej kategorii 
  
--- 7. Dla każdego produktu podaj jego nazwę, cenę, średnią cenę wszystkich produktów oraz różnicę między ceną produktu a średnią ceną wszystkich produktów 
  
--- 8. Dla każdego produktu podaj jego nazwę kategorii, nazwę produktu, cenę, średnią cenę wszystkich produktów danej kategorii oraz różnicę między ceną produktu a średnią ceną wszystkich produktów danej kategorii.
+-- Podzapytania i zapytania DML
+-- 1. Usuń wszystkich szczegóły zamówień (wiersze z OrderDetails) dotyczące produktu o nazwie "Chang"
+
+-- 2. Zwiększ o 10% ceny wszystkich produktów z kategorii "Confections"
+
+-- 3. Zmniejsz o 5% ceny wszystkich produktów dostarczanych przez dostawców z  Tokyo  (city)
+
+-- 4. Usuń wszystkie produkty z kategorii  o opisie "Cheeses" (Description)  o cenie większej od 50
+
+-- 5. Zwiększ o 10% cenę wszystkich produktów z kategorii o nazwie zaczynającej się na literę C 
+
+-- 6. Usuwamy wszystkie produkty dostarczane przez dostawców z USA
+
+-- 7. Usuń wszystkie zamówienia z Orders złożone przez klientów z Londynu ('London').
+
  
--- 9. Podaj łączną wartość zamówienia o numerze 1025 (uwzględnij cenę za przesyłkę). 
+-- Podzapytania wybierające jedną wartość
+-- 1. Podaj wszystkie produkty których cena jest mniejsza niż średnia cena produktu danej kategorii 
  
--- 10. Podaj łączną wartość zamówień każdego zamówienia (uwzględnij cenę za przesyłkę).
+-- 2. Dla każdego produktu podaj jego nazwę, cenę, średnią cenę wszystkich produktów oraz różnicę między ceną produktu a średnią ceną wszystkich produktów
  
--- 11. Czy są jacyś klienci którzy nie złożyli żadnego zamówienia w 1997 roku, jeśli tak to pokaż ich dane adresowe.
  
--- 12. Wyświetl nazwiska i imiona pracowników, którzy nie sprzedali niczego do Argentyny.
  
--- 13. Podaj produkty kupowane przez więcej niż jednego klienta
  
--- 14. Podaj produkty kupowane przez więcej niż 20 klientów
+ 

@@ -56,10 +56,16 @@ INSERT INTO test VALUES (4);
 -- C. Widzi tabele w tej bazie
 -- D. Może wyświetlić zawartość tabeli Test
 -- E. Może dodać dane (liczbę 5)
+
+
+-- --------------------------------------
 -- 14. Utwórz użytkownika serwisant
  
+ create user 'serwisant'@'localhost';
+
 -- 15. Daj prawo serwisantowi do usuwania danych z tabeli test w bazie egzaminy (samo usuwanie, bez prawa do wyszukiwania).
- 
+ GRANT delete ON Egzaminy.Test TO 'serwisant';
+
 -- 16. Sprawdź, czy serwisant (prawo do usuwania danych):
 -- A. widzi bazę Egzaminy
 -- B. Może jej użyć
